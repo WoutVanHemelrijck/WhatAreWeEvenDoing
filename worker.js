@@ -7,6 +7,13 @@ export default {
       return Response.redirect("https://whatareweevendoing.dev/williamifier/", 301);
     }
 
+    // WhatsApp Analyser is a FastAPI server hosted on its own subdomain (its
+    // frontend uses absolute /api paths, so it must live at a domain root).
+    // Redirect the portfolio path to it.
+    if (url.pathname === "/whatsappanalyser" || url.pathname.startsWith("/whatsappanalyser/")) {
+      return Response.redirect("https://whatsappanalyser.whatareweevendoing.dev/", 301);
+    }
+
     // Proxy /williamifier/* to the GitHub Pages app.
     if (url.pathname.startsWith("/williamifier/")) {
       const upstream = new URL(url.pathname + url.search, "https://woutvanhemelrijck.github.io");
